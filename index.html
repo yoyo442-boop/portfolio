@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>考沛瑶 · AI产品经理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+SC:wght@300;400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F6F1E9;
+  --cream-dark: #EDE6D6;
+  --olive: #4E5E35;
+  --olive-mid: #6B7D4A;
+  --olive-light: #8A9E60;
+  --olive-pale: #C8D5A4;
+  --olive-faint: #EAF0D8;
+  --sand: #C4A882;
+  --sand-light: #DDD0B5;
+  --charcoal: #2A2A20;
+  --muted: #7A7468;
+  --white: #FDFAF3;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--charcoal);font-family:'Noto Serif SC',serif;font-weight:300;line-height:1.85;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream-dark)}
+::-webkit-scrollbar-thumb{background:var(--olive-mid);border-radius:2px}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:58px;
+  background:rgba(246,241,233,0.93);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--sand-light);
+  transition:box-shadow 0.3s;
+}
+nav.scrolled{box-shadow:0 2px 20px rgba(78,94,53,0.08)}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;
+  color:var(--olive);letter-spacing:0.06em;text-decoration:none;
+}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color 0.3s;
+}
+.nav-links a:hover{color:var(--olive)}
+.nav-twin-btn{
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--olive);color:var(--white);
+  border:none;padding:0.42rem 1.1rem;border-radius:2px;
+  cursor:pointer;text-decoration:none;transition:all 0.3s;white-space:nowrap;
+}
+.nav-twin-btn:hover{background:var(--olive-mid);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--olive);transition:all 0.35s;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{
+  display:none;position:fixed;top:58px;left:0;right:0;
+  background:rgba(246,241,233,0.98);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--sand-light);z-index:199;
+  flex-direction:column;padding:1.5rem 2rem 2rem;gap:1.2rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  padding:0.4rem 0;border-bottom:1px solid var(--olive-faint);
+}
+.mobile-menu .nav-twin-btn{text-align:center;margin-top:0.5rem}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 2rem 60px;position:relative;overflow:hidden;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 85% 15%,rgba(78,94,53,0.07) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 60% at 15% 85%,rgba(196,168,130,0.1) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%,rgba(200,213,164,0.06) 0%,transparent 60%);
+}
+.hero-lines{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+  opacity:0.06;
+}
+.hero-lines::before{
+  content:'';position:absolute;
+  top:-50%;left:60%;width:1px;height:200%;
+  background:linear-gradient(to bottom,transparent,var(--olive),transparent);
+  transform:rotate(-15deg);
+}
+.hero-lines::after{
+  content:'';position:absolute;
+  top:-50%;left:70%;width:1px;height:200%;
+  background:linear-gradient(to bottom,transparent,var(--sand),transparent);
+  transform:rotate(-15deg);
+}
+.hero-content{position:relative;z-index:1;max-width:680px}
+
+/* Avatar */
+.avatar-wrap{
+  width:128px;height:128px;margin:0 auto 2.2rem;
+  position:relative;
+  animation:fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+.avatar-orbit{
+  position:absolute;inset:-10px;border-radius:50%;
+  border:1px dashed var(--olive-pale);
+  animation:spin 25s linear infinite;
+}
+.avatar-orbit::before{
+  content:'';position:absolute;top:50%;left:-4px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--olive-light);transform:translateY(-50%);
+}
+.avatar-img{
+  width:128px;height:128px;border-radius:50%;
+  object-fit:cover;object-position:top center;
+  border:3px solid var(--white);
+  box-shadow:0 8px 32px rgba(78,94,53,0.18),0 2px 8px rgba(78,94,53,0.12);
+  position:relative;z-index:2;
+}
+/* SVG彩色头像占位 */
+.avatar-svg{
+  width:128px;height:128px;border-radius:50%;
+  border:3px solid var(--white);
+  box-shadow:0 8px 32px rgba(78,94,53,0.18),0 2px 8px rgba(78,94,53,0.12);
+  position:relative;z-index:2;overflow:hidden;display:block;
+}
+
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--olive-light);
+  margin-bottom:0.8rem;
+  animation:fadeUp 0.9s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,8vw,5.5rem);font-weight:300;
+  color:var(--charcoal);letter-spacing:0.08em;line-height:1.1;
+  margin-bottom:1rem;
+  animation:fadeUp 0.9s 0.18s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-name em{font-style:italic;color:var(--olive)}
+.hero-tagline{
+  font-size:clamp(0.85rem,2vw,1rem);color:var(--muted);
+  letter-spacing:0.06em;margin-bottom:2.2rem;
+  animation:fadeUp 0.9s 0.26s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-contact{
+  display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;
+  font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;
+  color:var(--muted);margin-bottom:2.5rem;
+  animation:fadeUp 0.9s 0.34s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-contact span{display:flex;align-items:center;gap:0.4rem}
+.hero-btns{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.9s 0.42s cubic-bezier(0.16,1,0.3,1) both;
+}
+.btn-primary{
+  font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.1em;
+  text-transform:uppercase;background:var(--olive);color:var(--white);
+  border:none;padding:0.72rem 1.8rem;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:all 0.3s;
+}
+.btn-primary:hover{background:var(--olive-mid);transform:translateY(-2px);box-shadow:0 6px 20px rgba(78,94,53,0.25)}
+.btn-outline{
+  font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.1em;
+  text-transform:uppercase;background:transparent;color:var(--olive);
+  border:1px solid var(--olive-pale);padding:0.72rem 1.8rem;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:all 0.3s;
+}
+.btn-outline:hover{border-color:var(--olive);background:var(--olive-faint)}
+.scroll-hint{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;
+  color:var(--olive-pale);animation:fadeIn 1s 1.5s both;
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--olive-pale),transparent);animation:scrollAnim 2s 1.5s infinite}
+
+/* ─── SECTION COMMON ─── */
+section{padding:6rem 2rem}
+.section-inner{max-width:960px;margin:0 auto}
+.section-label{
+  font-family:'DM Mono',monospace;font-size:0.68rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--olive-light);
+  margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--olive-pale);max-width:60px}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:300;
+  color:var(--charcoal);margin-bottom:3rem;letter-spacing:0.04em;
+}
+.section-title em{font-style:italic;color:var(--olive)}
+
+/* ─── PHILOSOPHY (岗位理解) ─── */
+#philosophy{
+  background:var(--olive);padding:5rem 2rem;
+  position:relative;overflow:hidden;
+}
+#philosophy::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 80% at 90% 50%,rgba(255,255,255,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 50%,rgba(196,168,130,0.08) 0%,transparent 60%);
+}
+.philosophy-inner{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.philosophy-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:300;font-style:italic;
+  color:var(--white);line-height:1.6;margin-bottom:2rem;
+  opacity:0;transform:translateY(20px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.philosophy-quote.visible{opacity:1;transform:translateY(0)}
+.philosophy-body{
+  font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:2;
+  max-width:600px;margin:0 auto;
+  opacity:0;transform:translateY(15px);transition:all 0.8s 0.15s cubic-bezier(0.16,1,0.3,1);
+}
+.philosophy-body.visible{opacity:1;transform:translateY(0)}
+.philosophy-tags{
+  display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;
+  opacity:0;transition:all 0.8s 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.philosophy-tags.visible{opacity:1}
+.p-tag{
+  font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;
+  border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);
+  padding:0.3rem 0.9rem;border-radius:20px;
+}
+
+/* ─── EDUCATION ─── */
+#education{background:var(--cream-dark)}
+.edu-grid{display:grid;gap:1.5rem}
+.edu-card{
+  background:var(--white);border:1px solid var(--sand-light);
+  border-radius:4px;padding:2rem 2.5rem;
+  display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start;
+  transition:all 0.35s;
+  opacity:0;transform:translateY(20px);
+}
+.edu-card.visible{opacity:1;transform:translateY(0)}
+.edu-card:hover{border-color:var(--olive-pale);box-shadow:0 8px 30px rgba(78,94,53,0.08);transform:translateY(-2px)}
+.edu-school{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;
+  font-weight:600;color:var(--charcoal);letter-spacing:0.03em;
+}
+.edu-degree{font-size:0.85rem;color:var(--muted);margin-top:0.3rem;font-weight:300}
+.edu-detail{font-size:0.82rem;color:var(--olive-mid);margin-top:0.6rem;letter-spacing:0.02em}
+.edu-date{
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  color:var(--sand);letter-spacing:0.08em;white-space:nowrap;
+}
+
+/* ─── EXPERIENCE ─── */
+#experience{background:var(--cream)}
+.exp-item{
+  display:grid;grid-template-columns:200px 1fr;gap:0 3rem;
+  border-top:1px solid var(--cream-dark);padding:3rem 0;
+  opacity:0;transform:translateY(24px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.exp-item.visible{opacity:1;transform:translateY(0)}
+.exp-item:first-child{border-top:none;padding-top:0}
+.exp-left{padding-top:0.2rem}
+.exp-company{
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;
+  font-weight:600;color:var(--olive);line-height:1.4;
+}
+.exp-role{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.3rem;text-transform:uppercase}
+.exp-date{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--sand);margin-top:0.5rem;letter-spacing:0.06em}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.9rem}
+.exp-bullets li{
+  display:grid;grid-template-columns:auto 1fr;gap:0.8rem;
+  font-size:0.88rem;line-height:1.75;
+}
+.exp-bullets li::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--olive-pale);flex-shrink:0;margin-top:0.7rem;
+}
+.exp-label{font-weight:600;color:var(--charcoal)}
+.exp-result{
+  display:inline-flex;align-items:center;gap:0.5rem;flex-wrap:wrap;
+  margin-top:1.2rem;padding:1rem 1.5rem;
+  background:var(--olive-faint);border-left:2px solid var(--olive-light);
+  border-radius:0 3px 3px 0;font-size:0.82rem;color:var(--olive);
+  grid-column:1/-1;
+}
+.metric{
+  font-family:'DM Mono',monospace;font-weight:400;font-size:0.85rem;
+  color:var(--olive);background:var(--white);
+  padding:0.15rem 0.5rem;border-radius:2px;
+  border:1px solid var(--olive-pale);
+}
+
+/* ─── PROJECTS ─── */
+#projects{background:var(--cream-dark)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.proj-card{
+  background:var(--white);border:1px solid var(--sand-light);
+  border-radius:4px;padding:2rem;
+  transition:all 0.35s;cursor:default;
+  opacity:0;transform:translateY(20px);
+}
+.proj-card.visible{opacity:1;transform:translateY(0)}
+.proj-card:hover{border-color:var(--olive-pale);box-shadow:0 10px 40px rgba(78,94,53,0.1);transform:translateY(-4px)}
+.proj-tag{
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--olive-light);
+  border:1px solid var(--olive-pale);padding:0.2rem 0.7rem;border-radius:20px;
+  display:inline-block;margin-bottom:1rem;
+}
+.proj-name{
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;
+  font-weight:600;color:var(--charcoal);margin-bottom:0.4rem;
+}
+.proj-date{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--sand);margin-bottom:1rem;letter-spacing:0.06em}
+.proj-desc{font-size:0.84rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
+.proj-stack{
+  display:flex;flex-wrap:wrap;gap:0.4rem;
+}
+.stack-badge{
+  font-family:'DM Mono',monospace;font-size:0.63rem;
+  background:var(--olive-faint);color:var(--olive-mid);
+  padding:0.15rem 0.5rem;border-radius:2px;
+}
+.proj-metric{
+  margin-top:1rem;padding:0.6rem 0.9rem;
+  background:var(--olive-faint);border-radius:3px;
+  font-size:0.8rem;color:var(--olive);font-family:'DM Mono',monospace;
+}
+
+/* ─── SKILLS ─── */
+#skills{background:var(--cream)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+.skill-card{
+  padding:1.8rem;border:1px solid var(--cream-dark);border-radius:4px;
+  transition:all 0.35s;
+  opacity:0;transform:translateY(16px);
+}
+.skill-card.visible{opacity:1;transform:translateY(0)}
+.skill-card:hover{background:var(--white);border-color:var(--olive-pale);box-shadow:0 4px 20px rgba(78,94,53,0.06)}
+.skill-icon{font-size:1.4rem;margin-bottom:0.8rem}
+.skill-name{font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;letter-spacing:0.03em}
+.skill-desc{font-size:0.8rem;color:var(--muted);line-height:1.75}
+
+/* ─── SELF EVAL ─── */
+#selfeval{background:var(--cream-dark);padding:5rem 2rem}
+.eval-inner{max-width:800px;margin:0 auto}
+.eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+.eval-card{
+  padding:2rem;background:var(--white);border:1px solid var(--sand-light);border-radius:4px;
+  opacity:0;transform:translateY(18px);transition:all 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.eval-card.visible{opacity:1;transform:translateY(0)}
+.eval-num{
+  font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;
+  color:var(--olive-pale);line-height:1;margin-bottom:0.5rem;
+}
+.eval-title{font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem}
+.eval-text{font-size:0.82rem;color:var(--muted);line-height:1.85}
+
+/* ─── DIGITAL TWIN ─── */
+#twin{background:var(--cream);padding:6rem 2rem}
+.twin-inner{max-width:800px;margin:0 auto}
+.twin-header{text-align:center;margin-bottom:3rem}
+.twin-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--olive-faint);border:1px solid var(--olive-pale);
+  padding:0.3rem 1rem;border-radius:20px;margin-bottom:1.2rem;
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.1em;color:var(--olive);
+}
+.twin-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--olive-light);animation:blink 2s infinite}
+.twin-chat{
+  background:var(--white);border:1px solid var(--sand-light);border-radius:6px;
+  overflow:hidden;box-shadow:0 8px 40px rgba(78,94,53,0.08);
+}
+.twin-chat-header{
+  background:var(--olive);padding:1rem 1.5rem;
+  display:flex;align-items:center;gap:0.8rem;
+}
+.twin-avatar-mini{
+  width:34px;height:34px;border-radius:50%;overflow:hidden;
+  background:var(--olive-mid);flex-shrink:0;
+}
+.twin-name-mini{font-family:'DM Mono',monospace;font-size:0.72rem;color:rgba(255,255,255,0.9);letter-spacing:0.06em}
+.twin-status{font-size:0.68rem;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:0.3rem}
+.twin-status::before{content:'';width:5px;height:5px;border-radius:50%;background:#7cb87c;animation:blink 2s infinite}
+.twin-messages{
+  height:380px;overflow-y:auto;padding:1.5rem;
+  display:flex;flex-direction:column;gap:1rem;
+}
+.twin-messages::-webkit-scrollbar{width:2px}
+.twin-messages::-webkit-scrollbar-thumb{background:var(--olive-pale)}
+.msg{display:flex;gap:0.7rem;align-items:flex-start;max-width:85%}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg-bubble{
+  padding:0.75rem 1.1rem;border-radius:4px;
+  font-size:0.84rem;line-height:1.75;
+}
+.msg.ai .msg-bubble{
+  background:var(--cream-dark);color:var(--charcoal);
+  border:1px solid var(--sand-light);
+}
+.msg.user .msg-bubble{
+  background:var(--olive);color:var(--white);
+}
+.msg-time{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--sand-light);margin-top:0.3rem;text-align:right}
+.typing-indicator{display:flex;gap:4px;padding:0.75rem 1.1rem;background:var(--cream-dark);border:1px solid var(--sand-light);border-radius:4px}
+.typing-indicator span{width:5px;height:5px;border-radius:50%;background:var(--olive-pale);animation:typing 1.2s infinite}
+.typing-indicator span:nth-child(2){animation-delay:0.2s}
+.typing-indicator span:nth-child(3){animation-delay:0.4s}
+.twin-suggestions{
+  display:flex;gap:0.6rem;flex-wrap:wrap;padding:0 1.5rem 1rem;
+}
+.suggestion-btn{
+  font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.05em;
+  background:var(--olive-faint);color:var(--olive-mid);
+  border:1px solid var(--olive-pale);padding:0.35rem 0.9rem;border-radius:20px;
+  cursor:pointer;transition:all 0.25s;
+}
+.suggestion-btn:hover{background:var(--olive);color:var(--white);border-color:var(--olive)}
+.twin-input-area{
+  display:flex;gap:0.8rem;padding:1rem 1.5rem;
+  border-top:1px solid var(--cream-dark);align-items:flex-end;
+}
+.twin-input{
+  flex:1;border:1px solid var(--sand-light);border-radius:3px;
+  padding:0.65rem 1rem;font-family:'Noto Serif SC',serif;font-size:0.84rem;
+  color:var(--charcoal);background:var(--cream);resize:none;
+  outline:none;transition:border-color 0.3s;min-height:42px;max-height:120px;
+  line-height:1.5;
+}
+.twin-input:focus{border-color:var(--olive-light)}
+.twin-send{
+  width:42px;height:42px;border-radius:3px;border:none;
+  background:var(--olive);color:var(--white);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;flex-shrink:0;font-size:1.1rem;
+}
+.twin-send:hover{background:var(--olive-mid);transform:scale(1.05)}
+.twin-send:disabled{background:var(--olive-pale);cursor:not-allowed;transform:none}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--charcoal);color:rgba(255,255,255,0.5);
+  padding:3rem 2rem;text-align:center;
+}
+.footer-inner{max-width:960px;margin:0 auto}
+.footer-name{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  font-weight:300;color:rgba(255,255,255,0.8);letter-spacing:0.1em;margin-bottom:0.8rem;
+}
+.footer-contact{
+  display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
+  font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;
+  margin-bottom:2rem;
+}
+.footer-contact a{color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.3s}
+.footer-contact a:hover{color:var(--olive-pale)}
+.footer-divider{height:1px;background:rgba(255,255,255,0.08);margin:2rem 0}
+.footer-copy{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:rgba(255,255,255,0.25)}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes scrollAnim{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes typing{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .nav-twin-btn.desktop-only{display:none}
+  section{padding:4rem 1.2rem}
+  #philosophy{padding:4rem 1.2rem}
+  .exp-item{grid-template-columns:1fr;gap:0.8rem}
+  .exp-left{padding-bottom:0.5rem}
+  .eval-grid{grid-template-columns:1fr}
+  .twin-messages{height:300px}
+  .edu-card{grid-template-columns:1fr;padding:1.5rem}
+  #selfeval{padding:4rem 1.2rem}
+  #twin{padding:4rem 1.2rem}
+}
+@media(max-width:500px){
+  .hero-contact{gap:0.8rem;font-size:0.66rem}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-outline{width:100%;text-align:center}
+  .proj-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">KPY</a>
+  <ul class="nav-links">
+    <li><a href="#education">教育</a></li>
+    <li><a href="#experience">经历</a></li>
+    <li><a href="#projects">项目</a></li>
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#twin">数字分身</a></li>
+  </ul>
+  <a href="#twin" class="nav-twin-btn desktop-only">✦ 与我对话</a>
+  <button class="hamburger" id="hamburger" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#education" onclick="closeMobile()">教育经历</a>
+  <a href="#experience" onclick="closeMobile()">实习经历</a>
+  <a href="#projects" onclick="closeMobile()">项目经历</a>
+  <a href="#skills" onclick="closeMobile()">个人技能</a>
+  <a href="#twin" onclick="closeMobile()">数字分身</a>
+  <a href="#twin" class="nav-twin-btn" onclick="closeMobile()">✦ 与数字分身对话</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="avatar-wrap">
+      <div class="avatar-orbit"></div>
+      <img src="resume.JPG" alt="考沛瑶" class="avatar-img">
+    </div>
+    <div class="hero-eyebrow">AI Product Manager</div>
+    <h1 class="hero-name">考<em>沛</em>瑶</h1>
+    <p class="hero-tagline">AI产品经理 · 智能体产品经理 · 数据产品经理</p>
+    <div class="hero-contact">
+      <span>📍 随时到岗</span>
+      <span>📱 +86 19861823011</span>
+      <span>✉️ 19861823011@163.com</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#twin" class="btn-primary">✦ 与数字分身对话</a>
+      <a href="#experience" class="btn-outline">查看经历</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── EDUCATION ─── -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">教育<em>经历</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-school">哈尔滨工业大学</div>
+          <div class="edu-degree">建筑学 · 硕士在读</div>
+          <div class="edu-detail">绩点 3.59/4（排名 2/30）· 主修：人因工程学 · 光环境 · 智能照明 · 人机交互设计</div>
+        </div>
+        <div class="edu-date">2024.09—至今</div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-school">济南大学</div>
+          <div class="edu-degree">建筑学 · 本科</div>
+          <div class="edu-detail">绩点 4.38/5（前10%）· 连续四年奖学金 · 校级优秀学生 · 社会工作先进个人</div>
+        </div>
+        <div class="edu-date">2018.09—2023.06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHILOSOPHY ─── -->
+<div id="philosophy">
+  <div class="philosophy-inner">
+    <p class="philosophy-quote reveal-phi" id="phiQuote">
+      「AI不是工具的终点，而是产品思维的新起点——<br>真正的价值在于让技术能力精准落地于人的真实需求。」
+    </p>
+    <p class="philosophy-body reveal-phi" id="phiBody">
+      我理解AI产品经理的核心不是追逐技术前沿，而是在技术可能与用户需求之间建立精准的桥梁。
+      在优必选，我见证了AI功能如何从概念走向真实的用户行为数据；在构力科技，我理解了大模型如何在垂直行业中被裁剪和对齐。
+      我相信，既懂用户洞察又具备技术理解力的产品人，是当下AI产品时代最需要的复合型角色。
+    </p>
+    <div class="philosophy-tags reveal-phi" id="phiTags">
+      <span class="p-tag">用户洞察</span>
+      <span class="p-tag">RAG · Agent</span>
+      <span class="p-tag">数据驱动</span>
+      <span class="p-tag">垂类大模型</span>
+      <span class="p-tag">全链路落地</span>
+      <span class="p-tag">跨团队协同</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">实习<em>经历</em></h2>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">深圳市优必选科技</div>
+        <div class="exp-role">AI 产品实习</div>
+        <div class="exp-date">2025.09 — 2026.02</div>
+      </div>
+      <div class="exp-right">
+        <ul class="exp-bullets">
+          <li><div><span class="exp-label">产品策略规划：</span>制定一/二代萌UU陪伴类AI潮玩产品衔接策略，设计老带新、积分商城留存方案，结合性格体系策划关键词解锁性格、盲盒抽取等玩法，适配悟空教育场景设计趣味化AI互动策略</div></li>
+          <li><div><span class="exp-label">需求竞品分析：</span>开展30+灰度用户需求收集与评估，筛选高价值需求推动落地；对标行业同类AI机器人，从AI能力、功能设计、玩法体系等维度拆解优劣，为差异化功能迭代提供决策依据</div></li>
+          <li><div><span class="exp-label">功能落地与优化：</span>独立负责AI产品功能全流程落地（需求调研→内外部评审→开发排期→验收上线）；搭建多维度数据看板（活跃时间、词汇偏好、时装复购率），以数据驱动产品优化</div></li>
+          <li>
+            <div class="exp-result" style="grid-column:1/-1">
+              🎯 项目成果：
+              <span class="metric">周活 +20%</span>
+              <span class="metric">时装复购率 +15%</span>
+              <span class="metric">用户反馈问题率 -25%</span>
+              数据看板成为产品迭代核心支撑
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">北京构力科技</div>
+        <div class="exp-role">产品经理实习</div>
+        <div class="exp-date">2024.11 — 2025.04</div>
+      </div>
+      <div class="exp-right">
+        <ul class="exp-bullets">
+          <li><div><span class="exp-label">大模型协同共建：</span>深度参与构力科技与云雀大模型联合研发，聚焦建筑设计领域智能创作平台搭建；牵头梳理建筑行业图文生成、3D建模特殊场景需求，协调双方数据团队完成建筑设计语料清洗标注</div></li>
+          <li><div><span class="exp-label">需求体系搭建：</span>开展20场深度访谈与5轮场景测试，运用用户旅程地图提炼场景化提示精准匹配、风格参数快速调用、工程图质量词标准化三大核心诉求，输出功能需求-场景路径-技术实现转化框架</div></li>
+          <li><div><span class="exp-label">垂类功能打磨：</span>主导文生图功能场景化优化，搭建20+场景标签库（商业/住宅/市政），整理300+组风格词与质量词组合规则，联动算法团队推动3万+优质Prompt语料库测试</div></li>
+          <li>
+            <div class="exp-result" style="grid-column:1/-1">
+              🎯 实习成果：独立撰写 <span class="metric">4份核心功能PRD</span>，推动 <span class="metric">10+需求按期交付</span>，助力标杆客户生成效率提升 <span class="metric">40%</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">项目<em>经历</em></h2>
+    <div class="proj-grid">
+
+      <div class="proj-card reveal">
+        <span class="proj-tag">独立开发</span>
+        <div class="proj-name">萌UU智能客服Agent</div>
+        <div class="proj-date">2026.04 — 2026.05</div>
+        <p class="proj-desc">基于RAG+Agent架构的产品知识库智能客服系统，支持多轮对话、混合检索、工具调用与兜底检索，已双平台部署上线。</p>
+        <div class="proj-desc" style="margin-top:0.6rem;font-size:0.8rem">
+          经6轮迭代优化，解决小语料库IDF无效、短查询检索失败等核心问题；设计5个Tool Calling工具，增加兜底机制防止LLM幻觉。
+        </div>
+        <div class="proj-stack">
+          <span class="stack-badge">Python</span>
+          <span class="stack-badge">LangChain</span>
+          <span class="stack-badge">FAISS</span>
+          <span class="stack-badge">BGE-M3</span>
+          <span class="stack-badge">Qwen2.5-72B</span>
+          <span class="stack-badge">Streamlit</span>
+        </div>
+        <div class="proj-metric">检索准确率 60% → 90%｜Streamlit Cloud 部署上线</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <span class="proj-tag">人因工程研究</span>
+        <div class="proj-name">座舱智能光舒适度研究</div>
+        <div class="proj-date">2025.04 — 2025.07</div>
+        <p class="proj-desc">联动3家品牌门店设计分层调研方案，组织200+用户参与6场景模拟驾驶测试，收集230份样本，建立光环境体验数据库。</p>
+        <div class="proj-desc" style="margin-top:0.6rem;font-size:0.8rem">
+          运用SPSS交叉分析发现：20-35岁用户72%偏好动态氛围光，35-50岁用户85%关注防眩光，提炼年龄-场景-偏好三维需求模型。
+        </div>
+        <div class="proj-stack">
+          <span class="stack-badge">SPSS</span>
+          <span class="stack-badge">用户旅程地图</span>
+          <span class="stack-badge">生理指标监测</span>
+          <span class="stack-badge">Excel数据透视</span>
+        </div>
+        <div class="proj-metric">试点车型用户光环境满意度 +30%</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <span class="proj-tag">AIGC实践</span>
+        <div class="proj-name">AIGC辅助家具座椅设计</div>
+        <div class="proj-date">2024.06 — 2024.09</div>
+        <p class="proj-desc">搭建Prompt工程-模型微调-方案迭代全流程，运用Midjourney生成50+方案，StableDiffusion微调参数；与也门留学生3人小组跨文化协作。</p>
+        <div class="proj-stack">
+          <span class="stack-badge">Midjourney</span>
+          <span class="stack-badge">Stable Diffusion</span>
+          <span class="stack-badge">Prompt工程</span>
+          <span class="stack-badge">跨文化设计</span>
+        </div>
+        <div class="proj-metric">设计效率 +40%｜2款1:1原型｜150kg承重测试｜舒适度 4.6/5</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <span class="proj-tag">独立开发</span>
+        <div class="proj-name">AI文案生成助手</div>
+        <div class="proj-date">2026.05</div>
+        <p class="proj-desc">基于Flask+LLM API构建的场景化AI文案生成Web应用，支持6种场景模板（通用/电商/小红书/公众号/短视频/海报）、5种风格、3种长度。</p>
+        <div class="proj-desc" style="margin-top:0.6rem;font-size:0.8rem">
+          为每种场景设计差异化提示词模板：小红书场景强制大量emoji+短段落+话题标签，短视频场景强调口播节奏，电商场景突出卖点与购买理由，实现同主题多风格输出。
+        </div>
+        <div class="proj-stack">
+          <span class="stack-badge">Python</span>
+          <span class="stack-badge">Flask</span>
+          <span class="stack-badge">Qwen2.5-7B</span>
+          <span class="stack-badge">HTML</span>
+          <span class="stack-badge">CSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SELF EVAL ─── -->
+<section id="selfeval">
+  <div class="eval-inner">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">自我<em>评价</em></h2>
+    <div class="eval-grid">
+      <div class="eval-card reveal">
+        <div class="eval-num">01</div>
+        <div class="eval-title">技术 × 产品的复合视角</div>
+        <div class="eval-text">能独立完成RAG全链路搭建、Agent系统设计，同时具备完整的产品全流程经验（调研→PRD→评审→落地→复盘），是真正懂技术边界的产品经理。</div>
+      </div>
+      <div class="eval-card reveal">
+        <div class="eval-num">02</div>
+        <div class="eval-title">数据驱动的决策习惯</div>
+        <div class="eval-text">无论是搭建多维度数据看板、运用SPSS量化用户偏好，还是通过6轮迭代优化检索准确率，我习惯用数据验证直觉、用结果说话。</div>
+      </div>
+      <div class="eval-card reveal">
+        <div class="eval-num">03</div>
+        <div class="eval-title">持续探索的学习密度</div>
+        <div class="eval-text">对AI产品保持持续的探索热情，主动上手Coze、Dify、Cursor等前沿工具，累计编写近千条Prompt，形成对LLM产品能力边界的一手认知。</div>
+      </div>
+      <div class="eval-card reveal">
+        <div class="eval-num">04</div>
+        <div class="eval-title">跨背景的沟通协同力</div>
+        <div class="eval-text">有与算法、开发、UI/UX、数据等多团队协同经验；具备跨文化协作经历；人因工程学研究背景赋予我对用户体验更系统的理解框架。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">个人<em>技能</em></h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">产品能力</div>
+        <div class="skill-desc">需求调研→竞品分析→PRD撰写→评审落地→数据复盘全流程；熟练使用Axure、Visio、Xmind；主导多个功能从0到1落地上线</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">AI技术实践</div>
+        <div class="skill-desc">深入理解RAG全链路及Agent核心原理，具备LangChain框架实战经验；理解LLM模型选型、训练、评估与业务落地全流程</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">✍️</div>
+        <div class="skill-name">Prompt工程</div>
+        <div class="skill-desc">精通指令遵从、Few-shot、结构化Prompt设计与调优；累计编写近千条Prompt；熟悉GPT系列及主流大模型生态</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python编程</div>
+        <div class="skill-desc">Python基础、API调用与错误排查、批量处理；熟练使用Cursor/Trae等AI编程工具；具备Streamlit Cloud / HuggingFace部署经验</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-name">AIGC工具</div>
+        <div class="skill-desc">熟练使用Midjourney、Stable Diffusion等AIGC工具；掌握低代码/AI辅助开发（No Code/Trae/Cursor/Coze）</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">语言能力</div>
+        <div class="skill-desc">CET-6，具备良好英语听说读写能力，可参与英文技术文档阅读及跨语言团队协作</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIGITAL TWIN ─── -->
+<section id="twin">
+  <div class="twin-inner">
+    <div class="twin-header">
+      <div class="twin-badge">数字分身在线</div>
+      <div class="section-label" style="justify-content:center">Digital Twin</div>
+      <h2 class="section-title" style="text-align:center;margin-bottom:0.8rem">与<em>我</em>对话</h2>
+      <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-bottom:2rem">
+        这里是考沛瑶的AI数字分身，基于我的简历与真实经历，<br>可以回答你对我背景、项目、技能的任何问题。
+      </p>
+    </div>
+    <div class="twin-chat">
+      <div class="twin-chat-header">
+        <div class="twin-avatar-mini">
+          <svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17" cy="17" r="17" fill="#6B7D4A"/>
+            <ellipse cx="17" cy="22" rx="10" ry="8" fill="#4E5E35"/>
+            <ellipse cx="17" cy="14" rx="8" ry="9" fill="#E8A87C"/>
+            <ellipse cx="17" cy="9" rx="8" ry="5" fill="#2A1F14"/>
+          </svg>
+        </div>
+        <div>
+          <div class="twin-name-mini">考沛瑶 · 数字分身</div>
+          <div class="twin-status">在线</div>
+        </div>
+      </div>
+      <div class="twin-messages" id="chatMessages">
+        <div class="msg ai">
+          <div>
+            <div class="msg-bubble">
+              你好！我是考沛瑶的数字分身 ✦<br><br>
+              我熟悉她在优必选、构力科技的实习经历，了解她的RAG+Agent独立开发项目，也能聊聊她对AI产品的理解与职业规划。<br><br>
+              有什么想了解的，直接问我吧～
+            </div>
+            <div class="msg-time">刚刚</div>
+          </div>
+        </div>
+      </div>
+      <div class="twin-suggestions" id="suggestions">
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">你在优必选做了什么？</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">介绍一下RAG项目</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">你有哪些技术能力？</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">你的职业规划是什么？</button>
+      </div>
+      <div class="twin-input-area">
+        <textarea class="twin-input" id="userInput" placeholder="问我任何问题…" rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="twin-send" id="sendBtn" onclick="sendMessage()" title="发送">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-name">考沛瑶</div>
+    <p style="font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:1.5rem;color:rgba(255,255,255,0.35)">
+      AI PRODUCT MANAGER · INTELLIGENT AGENT · DATA PRODUCT
+    </p>
+    <div class="footer-contact">
+      <a href="tel:+8619861823011">📱 +86 19861823011</a>
+      <a href="mailto:19861823011@163.com">✉️ 19861823011@163.com</a>
+      <span>📍 随时到岗</span>
+    </div>
+    <div class="footer-divider"></div>
+    <p style="font-family:'DM Mono',monospace;font-size:0.68rem;color:rgba(255,255,255,0.35);margin-bottom:1rem">
+      <a href="https://menguu-bot-ebnikmip2utqduouknp3fh.streamlit.app" target="_blank" style="color:var(--olive-pale);text-decoration:none;transition:color 0.3s">
+        ✦ 萌UU智能客服演示：menguu-bot.streamlit.app
+      </a>
+    </p>
+    <div class="footer-copy">© 2026 考沛瑶 · AI产品经理个人主页 · Powered by Claude</div>
+  </div>
+</footer>
+
+<script>
+// ─── NAV ───
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+// ─── SCROLL REVEAL ───
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  io.observe(el);
+});
+
+// Philosophy reveal
+const phiObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.reveal-phi').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 180);
+      });
+      phiObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const phi = document.getElementById('philosophy');
+if (phi) phiObs.observe(phi);
+
+// ─── DIGITAL TWIN ───
+const replyCategories = {
+  intro: {
+    keywords: ['自我介绍', '介绍一下', '你是谁', '我是谁', '我的介绍', '关于我'],
+    responses: [
+      '大家好，我是考沛瑶，一名AI产品经理。我目前在哈尔滨工业大学攻读建筑学硕士学位，同时拥有丰富的AI产品实践经验，曾在优必选和构力科技担任产品经理实习生。',
+      '我是考沛瑶，专注于AI产品领域，特别是智能体和数据产品方向。我相信技术与产品的结合能够创造真正有价值的用户体验。',
+      '你好！我是考沛瑶，一名热爱AI技术的产品经理。我擅长将复杂的技术能力转化为用户友好的产品体验。'
+    ]
+  },
+  education: {
+    keywords: ['教育', '学历', '学校', '学习', '学位', '大学', '硕士', '本科', '哈工大', '济南大学'],
+    responses: [
+      '我目前在哈尔滨工业大学攻读建筑学硕士学位，主修人因工程学、光环境、智能照明和人机交互设计，绩点3.59/4，排名专业前7%。本科毕业于济南大学建筑学专业，绩点4.38/5，曾获得连续四年奖学金。',
+      '我的学术背景是建筑学，但我对AI和产品管理有着浓厚的兴趣。在哈工大的学习让我具备了严谨的逻辑思维和用户体验设计能力。',
+      '教育经历：哈工大硕士在读（2024.09至今），济南大学本科（2018-2023）。主修人因工程和人机交互，为我的AI产品工作打下了坚实基础。'
+    ]
+  },
+  experience: {
+    keywords: ['实习', '工作', '经历', '优必选', '构力科技', '实践', '经验', '项目经验'],
+    responses: [
+      '我曾在两家知名科技公司实习：2025年9月至2026年2月在深圳优必选科技担任AI产品实习生，负责萌UU陪伴类AI潮玩产品的策略规划和功能落地；2024年11月至2025年4月在北京构力科技参与建筑设计领域智能创作平台的研发。',
+      '在优必选，我独立负责AI产品功能全流程落地，搭建了多维度数据看板，推动周活提升20%、时装复购率提升15%。在构力科技，我参与大模型联合研发，撰写4份核心PRD，推动10+需求按期交付。',
+      '两段实习经历让我积累了丰富的AI产品实践经验：从需求调研到PRD撰写，从跨团队协同到数据驱动优化，我都有深入的体会。'
+    ]
+  },
+  projects: {
+    keywords: ['项目', '作品', '产品', 'RAG', '智能客服', 'Agent', 'AI文案', '座舱', '光舒适度', 'AIGC', '家具设计'],
+    responses: [
+      '我主导过多个项目：萌UU智能客服Agent（RAG+Agent架构，检索准确率从60%提升至90%）、AI文案生成助手（Flask+LLM，支持6种场景模板）、座舱智能光舒适度研究（200+用户测试）、AIGC辅助家具座椅设计（效率提升40%）。',
+      '最近的项目是AI文案生成助手，基于Flask+Qwen2.5-7B构建，支持通用、电商、小红书、公众号、短视频、海报6种场景，5种风格，3种长度，能实现同主题多风格输出。',
+      '我的项目经历涵盖AI技术实践和用户研究：从RAG全链路搭建到Prompt工程优化，再到人因工程用户测试，形成了完整的产品能力闭环。'
+    ]
+  },
+  skills: {
+    keywords: ['技能', '能力', '技术', '擅长', '掌握', '工具', 'Python', 'Prompt', '产品', 'AI'],
+    responses: [
+      '我的核心技能包括：产品全流程管理（需求调研→PRD→落地→复盘）、AI技术实践（RAG/Agent/LangChain）、Prompt工程（近千条Prompt编写经验）、Python编程、AIGC工具（Midjourney/Stable Diffusion）。',
+      '作为AI产品经理，我既能完成RAG全链路搭建、Agent系统设计，也能撰写高质量PRD，是真正懂技术边界的产品人。',
+      '技能亮点：CET-6英语能力、熟练使用Axure/Visio/Xmind、具备Streamlit Cloud部署经验、熟悉Coze/Dify/Cursor等前沿工具。'
+    ]
+  },
+  ai_understanding: {
+    keywords: ['AI产品经理', '理解', '看法', '产品思维', 'AI产品', '智能体', '大模型', 'RAG', 'Agent'],
+    responses: [
+      '我理解AI产品经理的核心不是追逐技术前沿，而是在技术可能与用户需求之间建立精准的桥梁。真正的价值在于让技术能力精准落地于人的真实需求场景。',
+      '作为AI产品经理，我认为需要具备三个核心能力：技术理解力（懂LLM、RAG、Agent原理）、用户洞察力（能用数据验证需求）、落地执行力（能推动从概念到上线）。',
+      'AI产品的本质是"人-机-境"的协同优化。好的AI产品应该是"润物细无声"的，让用户在不知不觉中感受到效率的提升。'
+    ]
+  },
+  contact: {
+    keywords: ['联系', '电话', '邮箱', '求职', '简历', '岗位', '到岗', '招聘'],
+    responses: [
+      '很高兴你对我的背景感兴趣！我的联系方式：电话 +86 19861823011，邮箱 19861823011@163.com。我目前可以随时到岗。',
+      '如果你有合适的AI产品岗位机会，欢迎联系我！电话：19861823011，邮箱：19861823011@163.com，期待与你交流。',
+      '感谢关注！我的简历展示了完整的项目和实习经历，如有进一步交流需求，请随时通过电话或邮箱联系我。'
+    ]
+  },
+  default: {
+    keywords: [],
+    responses: [
+      '谢谢你的提问！我是考沛瑶的数字分身，了解她的教育背景、实习经历、项目经验和技能专长。如果你有具体问题，欢迎继续提问～',
+      '很高兴与你交流！我可以介绍考沛瑶的学习和工作经历，以及她对AI产品的理解。请问你想了解哪方面？',
+      '我是考沛瑶的AI数字分身，基于她的真实简历和经历开发。关于她的背景、技能或项目，都可以问我～'
+    ]
+  }
+};
+
+function findBestCategory(question) {
+  let bestCategory = 'default';
+  let maxScore = 0;
+  
+  for (const [category, data] of Object.entries(replyCategories)) {
+    if (category === 'default') continue;
+    let score = 0;
+    for (const keyword of data.keywords) {
+      if (question.includes(keyword)) {
+        score++;
+      }
+    }
+    if (score > maxScore) {
+      maxScore = score;
+      bestCategory = category;
+    }
+  }
+  
+  return bestCategory;
+}
+
+function getRandomResponse(category) {
+  const responses = replyCategories[category].responses;
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+let conversationHistory = [];
+let isLoading = false;
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function sendSuggestion(btn) {
+  const text = btn.textContent;
+  document.getElementById('userInput').value = text;
+  document.getElementById('suggestions').style.display = 'none';
+  sendMessage();
+}
+
+function getTime() {
+  const now = new Date();
+  return now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+}
+
+function addMessage(role, text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.innerHTML = `<div>
+    <div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>
+    <div class="msg-time">${getTime()}</div>
+  </div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.id = 'typingIndicator';
+  div.innerHTML = `<div><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function sendMessage() {
+  if (isLoading) return;
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  isLoading = true;
+  const sendBtn = document.getElementById('sendBtn');
+  sendBtn.disabled = true;
+  input.value = '';
+  input.style.height = 'auto';
+
+  addMessage('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  showTyping();
+
+  setTimeout(() => {
+    removeTyping();
+    const category = findBestCategory(text);
+    const reply = getRandomResponse(category);
+    addMessage('ai', reply);
+    conversationHistory.push({ role: 'assistant', content: reply });
+    
+    isLoading = false;
+    sendBtn.disabled = false;
+  }, 800 + Math.random() * 600);
+}
+</script>
+</body>
+</html>
